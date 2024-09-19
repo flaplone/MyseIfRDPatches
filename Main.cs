@@ -244,8 +244,7 @@ namespace MyseIfRDPatches
 				#warning fix this
                 ShowAccuracy.P1Hits = new int[9];
                 ShowAccuracy.P2Hits = new int[9];
-				ShowAccuracy.p1Miss = -1f;
-				ShowAccuracy.p2Miss = -1f;
+				ShowAccuracy.lastMistakes = new double[2];
 
                 GhostTapMiss.endLevel = false;
 

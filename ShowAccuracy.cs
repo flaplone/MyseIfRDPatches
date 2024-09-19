@@ -12,8 +12,7 @@ namespace MyseIfRDPatches
 		internal static int[] P1Hits = { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 		internal static int[] P2Hits = { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 
-		internal static float p1Miss = -1f;
-		internal static float p2Miss = -1f;
+		internal static double[] lastMistakes = new double[2];
 
 		public static void AddAccuracy(RDPlayer player, double timeOffset)
 		{
@@ -65,7 +64,14 @@ namespace MyseIfRDPatches
 		{
 			if (__instance.row.playerBox != null && __instance.row.ent != null && !__instance.row.dead
 			 && __instance.conductor.audioPos > __instance.inputTime + 0.4 && !__instance.playerDrives7thBeat
-			 && !__instance.hasPulsed7thBeat && !__instance.bomb && !__instance.unhittable) AddAccuracy(__instance.row.playerProp.GetCurrentPlayer(), 999);
+			 && !__instance.hasPulsed7thBeat && !__instance.bomb && !__instance.unhittable)
+			{
+				int player = (int)__instance.row.playerProp.GetCurrentPlayer();
+				if (lastMistakes[player] != __instance.inputTime) {
+					AddAccuracy(__instance.row.playerProp.GetCurrentPlayer(), 999);
+				}
+				lastMistakes[player] = __instance.inputTime;
+			}
 			return true;
 		}
 
@@ -76,7 +82,7 @@ namespace MyseIfRDPatches
 			if (__instance.game.currentLevel.levelType == LevelType.Boss) return;
 			if (GC.showAbsoluteOffsets)
 			{
-				#warning change accuracy formula
+#warning change accuracy formula
 				double P1Accuracy = (P1Hits[0] + P1Hits[1] + P1Hits[2] * 0.75 + P1Hits[3] * 0.5) / (P1Hits[0] + P1Hits[1] + P1Hits[2] + P1Hits[3] + P1Hits[4]) * 100;
 				double P2Accuracy = (P2Hits[0] + P2Hits[1] + P2Hits[2] * 0.75 + P2Hits[3] * 0.5) / (P2Hits[0] + P2Hits[1] + P2Hits[2] + P2Hits[3] + P2Hits[4]) * 100;
 				string SingleplayerResults = "";
