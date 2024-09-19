@@ -1,4 +1,6 @@
 /Libs
 /obj
 /bin
-ConfigurationManagerAttributes.cs
+
+# this is required to build
+# ConfigurationManagerAttributes.cs

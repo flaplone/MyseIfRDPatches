@@ -254,7 +254,7 @@ namespace MyseIfRDPatches
                 LevelFinishDetails.song = curLevel.data.settings.song;
                 LevelFinishDetails.artist = curLevel.data.settings.artist;
                 LevelFinishDetails.author = curLevel.data.settings.author;
-                LevelFinishDetails.bestPrev = ((Rank) Persistence.GetCustomLevelRank(hash, scnGame.customLevelSpeed)).ToString();
+                LevelFinishDetails.bestPrev = ((Rank) Persistence.GetCustomLevelRank(hash, scnGame.levelSpeed)).ToString();
 
                 //RDC.debug = true;
             }
