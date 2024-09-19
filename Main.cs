@@ -36,7 +36,7 @@ namespace MyseIfRDPatches
 
         internal enum ShowFPSOptions { Enabled, Legacy, Disabled }
         internal enum FailConditionOptions { None, Heartbreak, Perfect }
-        internal enum AccuracyOptions { Standard, ADOFAI }
+        internal enum AccuracyOptions { Standard, ADOFAI, Spread }
 
         private void Awake()
         {
@@ -241,8 +241,11 @@ namespace MyseIfRDPatches
             [HarmonyPostfix]
             public static void Postfix(scnGame __instance)
             {
-                ShowAccuracy.P1Hits = new int[] {0, 0, 0, 0, 0};
-                ShowAccuracy.P2Hits = new int[] {0, 0, 0, 0, 0};
+				#warning fix this
+                ShowAccuracy.P1Hits = new int[9];
+                ShowAccuracy.P2Hits = new int[9];
+				ShowAccuracy.p1Miss = -1f;
+				ShowAccuracy.p2Miss = -1f;
 
                 GhostTapMiss.endLevel = false;
 
